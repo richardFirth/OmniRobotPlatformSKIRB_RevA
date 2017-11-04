@@ -1,4 +1,4 @@
 # OmniRobotPlatformSKIRB_RevA
 Code to control the basic omni robot platform with an xbee remote
 
-// ![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
+![alt text](/richardFirth/OmniRobotPlatformSKIRB_RevA/blob/master/OmniBotPhoto.png?raw=true "Title")
