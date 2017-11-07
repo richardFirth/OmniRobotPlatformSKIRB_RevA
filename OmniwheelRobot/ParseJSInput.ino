@@ -31,6 +31,7 @@
 
 void getLatestXBeeData()
 {
+  static unsigned long lastRecieved;
   XBeeFlushUnilLatest(); // get rid of all the data except the most recent two bytes.
 // fast projects may have an empty serial, in which case they do nothing
 // fast projects may also encounter a single byte, in which case they parse it (they will get the complimentary byte in ~ 10 millisends
@@ -42,10 +43,10 @@ void getLatestXBeeData()
         byte incomingData;
         incomingData = XBee.read();
         processTheByte(incomingData); // send byte to be unpacked
+        lastRecieved = millis(); // Reset all to default if we haven't heard from the remote in a while
       }
   }
   
-    lastRecieved = millis(); // Reset all to default if we haven't heard from the remote in a while
     if (lastRecieved + 250 < millis()){
       resetRemoteInput();
     }
@@ -77,7 +78,7 @@ void processTheByte(byte aByte)
 {
   // check each bit of the incoming byte, and unpack the joystick values.
   
-  if (isClear(aByte,7)){
+  if (isClear(aByte,7)){            // unpacking button values
     JOYSTICK_BUTTON = isSet(aByte,6);
     L_TRIG = isSet(aByte,5);
     R_TRIG = isSet(aByte,4);
@@ -87,7 +88,7 @@ void processTheByte(byte aByte)
     RIGHT_BUTTON = isSet(aByte,0);
    }
    
-  if (isSet(aByte,7)){
+  if (isSet(aByte,7)){   // unpack joystick & batteries
 
     byte H_val = customByte(false,false,false,false,false,isSet(aByte,5),isSet(aByte,4),isSet(aByte,3));
     byte V_val = customByte(false,false,false,false,false,isSet(aByte,2),isSet(aByte,1),isSet(aByte,0));
@@ -98,7 +99,7 @@ void processTheByte(byte aByte)
 
 }
 
-int unpackJoystick(byte JSVal)
+int unpackJoystick(byte JSVal) // map joystick back to 0 to 1023 range
 {
   if (JSVal==1) return 0;
   if (JSVal==2) return 220;

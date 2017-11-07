@@ -27,7 +27,6 @@ SoftwareSerial XBee(XBEE_RX,XBEE_TX); // RX, TX
 boolean UP_BUTTON, DOWN_BUTTON, LEFT_BUTTON, RIGHT_BUTTON,L_TRIG,R_TRIG,JOYSTICK_BUTTON;
 int verticalValue = 512, horizontalValue=512;
 boolean JoystickBatteryGood;
-unsigned long lastRecieved;
 
 #define lowVoltageSetting 693 // 11.1 lowV // Low V const precalculated so we're not going the same calculation every loop.
 #define R_Batt 10000.0 // not used in code

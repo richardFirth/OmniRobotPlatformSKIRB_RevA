@@ -7,7 +7,7 @@ void testLowVoltage(int rawPinRead)
 
   if (!JoystickBatteryGood) // if the joystick battery is bad, alert the user and stop.
   {
-    while(1)
+    for(int x = 1;x < 20;x++)
     {
       digitalWrite(BlueLED,HIGH);
       delay(50);
