@@ -4,7 +4,7 @@
 
 // @@@@@@ #include statements to bring in libraries @@@@@@
    #include <SoftwareSerial.h> // for communicating with the XBee
-
+   #include "OmniRobot.h"
 
 // @@@@@@ #define statements for Pin values @@@@@@
    #define XBEE_RX 2   //RX Pin For Software Serial
@@ -28,14 +28,13 @@ boolean UP_BUTTON, DOWN_BUTTON, LEFT_BUTTON, RIGHT_BUTTON,L_TRIG,R_TRIG,JOYSTICK
 int verticalValue = 512, horizontalValue=512;
 boolean JoystickBatteryGood;
 
-#define lowVoltageSetting 693 // 11.1 lowV // Low V const precalculated so we're not going the same calculation every loop.
-#define R_Batt 10000.0 // not used in code
-#define R_GND 4700.0   // not used in code
+OmniRobot OmniBot = OmniRobot(PWM_1,PWM_2,PWM_3,PWM_4,latchPin,clockPin,dataPin,BatteryV);
+
 
 void setup() {
 
    Serial.begin(9600);
-   Serial.println(F("OmniwheelRobot"));
+   Serial.println(F("OmniRobotRobot"));
    Serial.println(F("Last Modified 29Sep2017"));
    XBee.begin(9600);
 
@@ -51,13 +50,8 @@ void setup() {
    
    pinMode(BlueLED,OUTPUT);   //
 
-        for(int x = 1;x < 3;x++) // flash the shift register leds a bit to show that we're online.
-        {
-           sendDataToShiftReg(0);
-           delay(250);
-           sendDataToShiftReg(255);  
-           delay(250);
-        }
+   OmniBot.welcomeSequence();
+   if (OmniBot.getBatteryVoltage() < 6.0) OmniBot.disableLowVolageAlarm(true);
 }
 
 
@@ -66,12 +60,7 @@ void loop()
 {
   getLatestXBeeData(); // get latest xbee
   movementLoop(); // move robots
-  testLowVoltage(analogRead(A0)); //check batteries
+
 }
  
-void sendDataToShiftReg(int z) //generic code for controlling shift register
-{
-   shiftOut(dataPin, clockPin, MSBFIRST,z);
-   digitalWrite(latchPin, HIGH);
-   digitalWrite(latchPin, LOW);
-}
+
