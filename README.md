@@ -1,7 +1,11 @@
 # OmniRobotPlatformSKIRB_RevA  
-Code to control the basic omni robot platform with an xbee remote.  
+Documentation of my Omni robot platform.
 
-The robot is designed to be modular and is based around a motor control board.  
+The robot is designed to be modular and is based around a 3D Printed/Laser cut chassis.
+This has a motor control board that connects to the battery and switch.
+The motor control board has a socket that can accept different boards that are plugged in.
+
+
 Different modules can be attached to the shield for control via different methods.  
 
 **CAD Model:**  https://grabcad.com/library/omni-robot-platform-skirb_reva-1  
