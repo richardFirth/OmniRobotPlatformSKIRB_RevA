@@ -1,3 +1,4 @@
 # XBeeControl_Module
 
-module for control with xbee  
+Plug-In Module for control with xbee joystick 
+https://github.com/richardFirth/WirelessJoystick 
