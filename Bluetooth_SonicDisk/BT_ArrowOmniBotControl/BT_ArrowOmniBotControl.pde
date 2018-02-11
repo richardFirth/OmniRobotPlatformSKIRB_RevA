@@ -3,7 +3,7 @@ import processing.serial.*;
 SerialConnector sc;
 Serial myPort;
 
-SonicRing SR;
+SonicDisc SD;
 
 boolean UP_BUTTON, DOWN_BUTTON, LEFT_BUTTON, RIGHT_BUTTON,L_TRIG,R_TRIG;
 boolean SPD_H,SPD_M,SPD_L;
@@ -22,7 +22,7 @@ void setup(){
  size(1800,1000);
  
  sc = new SerialConnector(this,myPort);
- SR = new SonicRing();
+ SD = new SonicDisc();
  sc.changeBaud();
  
   rectMode(CENTER);
@@ -47,7 +47,7 @@ void draw(){
  *  0: right button state
 */
   //packageSent = false;
-  SR.drawSonicRing(sonic0,sonic1,sonic2,sonic3,sonic4,sonic5,sonic6,sonic7);
+  SD.drawSonicRing(sonic0,sonic1,sonic2,sonic3,sonic4,sonic5,sonic6,sonic7);
   sc.drawToScreen();
   
   if (keyPressed) {
@@ -112,8 +112,6 @@ void keyPressed() {
 
 void sendPackage(byte aByte){
      sc.writeToSerial(aByte);
-     //sc.writeToSerial(customByte(true,true,true,false,false,false,false,true));
-     
      sc.writeToSerial(-31);
 }
 
