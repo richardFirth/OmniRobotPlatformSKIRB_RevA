@@ -1,15 +1,13 @@
 // SonicDisc
-// latest 11Feb18
-// By Richard Firth https://github.com/richardFirth
-
 /*
+latest 11Feb18
+By Richard Firth https://github.com/richardFirth
 This is a processing3 object that can be copypasted into a sketch to visually display the ouput of a sonicDisc.
- 
 */
 class SonicDisc {
   SonicDisc() {
   }
-
+  // draw sonic ring object
   void drawSonicRing(int m0, int m1, int m2, int m3, int m4, int m5, int m6, int m7) {
     pushMatrix();
     translate(width/2, height/2);
@@ -26,7 +24,7 @@ class SonicDisc {
 
     popMatrix();
   }
-
+  // draw sensor reading. this is local, and meant to make things easier
   void showSensorReading(int sNum, int measurement) {
     if (measurement==0) return;
     float inches = measurement/2.5;
@@ -39,7 +37,7 @@ class SonicDisc {
     fill(0);
     text(str(sNum), dist*cos(n/57.2958), dist*sin(n/57.2958));
   }
-
+   // get a clock postion to draw the ring in a circle. this is local, and meant to make things easier
   float getClockPosition(int SensorNumber) {
 
     switch(SensorNumber) {

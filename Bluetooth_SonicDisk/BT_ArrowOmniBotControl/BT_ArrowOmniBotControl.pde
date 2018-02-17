@@ -23,7 +23,7 @@ void setup(){
  
  sc = new SerialConnector(this,myPort);
  SD = new SonicDisc();
- sc.changeBaud();
+ sc.changeBaud(38400);
  
   rectMode(CENTER);
   sc.listPorts();
